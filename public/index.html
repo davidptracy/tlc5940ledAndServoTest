@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>FEED OF JOHN WHILE HE WORKS</title>
+	<script src="/socket.io/socket.io.js"></script>
+	<script>
+
+    var gyroVals = [0,0,0];
+
+    // =============================================
+    // 1 - connect to node socket.io server
+    // =============================================
+    var socket = io();
+
+    socket.on('connect', function() {
+      console.log("Connected");
+    });
+
+    function init() {
+      //Find our div containers in the DOM
+      var dataContainerOrientation = document.getElementById('dataContainerOrientation');
+ 
+      //Check for support for DeviceOrientation event
+      if(window.DeviceOrientationEvent) {
+        window.addEventListener('deviceorientation', function(event) {
+                
+                var alpha = event.alpha;
+                var beta = event.beta;
+                var gamma = event.gamma;
+
+                gyroVals[0] = alpha;
+                gyroVals[1] = beta;
+                gyroVals[2] = gamma;
+
+                // console.log(gyroVals);
+
+                sendVals(gyroVals);
+ 
+                // if(alpha!=null || beta!=null || gamma!=null) 
+                //   dataContainerOrientation.innerHTML = 'alpha: ' + alpha + '<br/>beta: ' + beta + '<br />gamma: ' + gamma;
+              }, false);
+      }
+    }
+
+    function sendVals(values){
+      socket.emit('clientGyro',values);
+    }   
+
+    </script>
+</head>
+<body onload="init()">
+<!--     <div id="dataContainerOrientation">
+      No device orientation data
+    </div> -->
+
+	<img class="feed" style="width:100%;" src="/stream.jpg"></img>
+
+</body>
+</html>
