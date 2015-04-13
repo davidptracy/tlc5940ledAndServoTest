@@ -57,9 +57,9 @@ io.sockets.on('connection', function (socket){
 		beta = Math.floor(data[1]);
 		gamma = Math.floor(data[2]);
 
-		gyroVals[0] = map_range(alpha, 0, 360, 5, 175);
-        gyroVals[1] = map_range(beta, -180, 180, 42, 175);
-        gyroVals[2] = map_range(gamma, -180, 180, 5, 175);
+		gyroVals[0] = Math.floor(map_range(alpha, 0, 360, 5, 175));
+        gyroVals[1] = Math.floor(map_range(beta, -180, 180, 42, 175));
+        gyroVals[2] = Math.floor(map_range(gamma, -180, 180, 5, 175));
 
 		console.log("Received gyroVals from client: " + gyroVals);
 		
