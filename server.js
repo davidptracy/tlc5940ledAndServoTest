@@ -52,7 +52,9 @@ io.sockets.on('connection', function (socket){
 	connectedSockets.push(socket);
 
 	socket.on('oculusOrientation', function(data){
-		console.log(data);
+		console.log('pitch is ' + data[0]);
+		console.log('yaw is ' + data[1]);
+		console.log('roll is ' + data[2]);
 
 
 		var pitch = data[0]; // this is pitch (up and down)
