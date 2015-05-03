@@ -53,7 +53,7 @@ io.sockets.on('connection', function (socket){
 
 	socket.on('oculusOrientation', function(data){
 		// console.log('pitch is ' + data[0]);
-		console.log('pitch rounded is ' + Math.floor(map_range(data[0], -.7, .7, 175, 5)
+		console.log('pitch rounded is ' + Math.floor(map_range(data[0], -.7, .7, 175, 5));
 		console.log('yaw is ' + data[1]);
 		console.log('roll is ' + data[2]);
 
