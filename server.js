@@ -60,6 +60,8 @@ io.sockets.on('connection', function (socket){
 		oculusOrientationVals[1] = Math.floor(map_range(pitch, .7, -.7, 5, 175));
 		oculusOrientationVals[2] = Math.floor(map_range(pitch, .7, -.7, 5, 175));
 
+		console.log("Received gyroVals from oculus: " + gyroVals);
+
 		socket.broadcast.emit['oculusVals', oculusOrientationVals];
 	});
 
