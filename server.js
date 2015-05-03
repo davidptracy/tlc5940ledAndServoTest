@@ -40,6 +40,7 @@ app.get('/stream.jpg', new MjpegProxy('http://128.122.6.53:8080/?action=stream')
 //========================================================
 
 var gyroVals = [0,0,0];
+var oculusOrientationVals = [0,0,0];
 
 var connectedSockets = [];
 
@@ -49,6 +50,18 @@ io.sockets.on('connection', function (socket){
 
 	//add it to the array of connected sockets
 	connectedSockets.push(socket);
+
+	socket.on('oculusOrientation', function(data){
+		var pitch = Math.floor(data[0]); // this is pitch (up and down)
+		var yaw = Math.floor(data[1]);
+		var roll = Math.floor(data[2]);
+
+		oculusOrientationVals[0] = Math.floor(map_range(pitch, .7, -.7, 5, 175));
+		oculusOrientationVals[1] = Math.floor(map_range(pitch, .7, -.7, 5, 175));
+		oculusOrientationVals[2] = Math.floor(map_range(pitch, .7, -.7, 5, 175));
+
+		socket.broadcast.emit['oculusVals', oculusOrientationVals];
+	});
 
 	// receives a random photo from a client
 	socket.on('clientGyro', function(data){
@@ -63,7 +76,7 @@ io.sockets.on('connection', function (socket){
 
 		console.log("Received gyroVals from client: " + gyroVals);
 		
-		socket.broadcast.emit('inputVals', gyroVals);
+		// socket.broadcast.emit('inputVals', gyroVals);
 		
 	});
 
