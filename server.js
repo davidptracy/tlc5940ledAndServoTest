@@ -52,6 +52,9 @@ io.sockets.on('connection', function (socket){
 	connectedSockets.push(socket);
 
 	socket.on('oculusOrientation', function(data){
+		console.log(data);
+
+
 		var pitch = data[0]; // this is pitch (up and down)
 		var yaw = data[1];
 		var roll = data[2];
@@ -60,7 +63,7 @@ io.sockets.on('connection', function (socket){
 		oculusOrientationVals[1] = Math.floor(map_range(yaw, .7, -.7, 5, 175));
 		oculusOrientationVals[2] = Math.floor(map_range(roll, .7, -.7, 5, 175));
 
-		console.log("Received gyroVals from oculus: " + gyroVals);
+		// console.log("Received gyroVals from oculus: " + gyroVals);
 
 		socket.broadcast.emit['oculusVals', oculusOrientationVals];
 	});
