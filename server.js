@@ -69,7 +69,7 @@ io.sockets.on('connection', function (socket){
 
 		// console.log("Received gyroVals from oculus: " + gyroVals);
 
-		socket.broadcast.emit['oculusVals', oculusOrientationVals];
+		socket.broadcast.emit('oculusVals', oculusOrientationVals);
 	});
 
 	// receives a random photo from a client
