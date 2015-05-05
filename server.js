@@ -61,8 +61,8 @@ io.sockets.on('connection', function (socket){
 		var yaw = data[1];
 		var roll = data[2];
 
-		oculusOrientationVals[0] = Math.floor(map_range(pitch, -.7, .7, 175, 5));
-		oculusOrientationVals[1] = Math.floor(map_range(yaw, -.7, .7, 175, 5));
+		oculusOrientationVals[0] = Math.floor(map_range(pitch, -.7, .7, 5, 175));
+		oculusOrientationVals[1] = Math.floor(map_range(yaw, -.7, .7, 5, 175));
 		oculusOrientationVals[2] = Math.floor(map_range(roll, -.7, .7, 5, 175));
 
 		console.log(oculusOrientationVals);
